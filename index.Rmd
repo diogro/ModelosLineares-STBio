@@ -48,7 +48,7 @@ O link "Atividades Preparatórias" oferece um introdução da linguagem.
 
 # Tutoriais
 
-- Tutorial 1: [Modelos lineares simples](tutoriais/lab1.html)
+- Tutorial 1: [Modelos lineares simples](tutoriais/lab.html)
 - Tutorial 2: [Modelos lineares múltiplos](tutoriais/lab2.html)
 - Tutorial 3: [Introdução à inferência causal](tutoriais/PensamentoCausal.html)
 
