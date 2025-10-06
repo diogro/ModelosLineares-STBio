@@ -46,7 +46,11 @@ In the introductory lecture for linear models, we used an example dataset to fit
 _The dataset itself was generated according to the specifications of the model above_. We are going to recreate the dataset and some of the calculations presented during the class. 
 
 ```{r create_dataset}
-set.seed(4) #ensures the result is reproducible. The random number generation can vary between Operative systems so maybe there will be different datasets in the classroom
+# Using set.seed(4) ensures the result is reproducible. The random number 
+# generator can vary between operating systems, so maybe there will be
+#different datasets in the classroom
+
+set.seed(4)
 N = 30
 x <- runif(N, 0, 5)
 n <- length(x)
