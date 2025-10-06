@@ -50,11 +50,11 @@ Esse curso é baseado no curso de modelagem estatística oferecido na formação
 - **Aula 1**: Introdução e Modelos lineares simples ([slides](slides/ModelosLineares.pdf))
 - **Aula 2**: Modelos lineares múltiplos, transformação e interações ([slides](slides/ModelosLinearesMultiplos.pdf))
 
-- Tutorial 1: Modelos lineares simples
-- Tutorial 2: Modelos lineares múltiplos
+- Tutorial 1: [Modelos lineares simples](tutoriais/lab1.html)
+- Tutorial 2: [Modelos lineares múltiplos](tutoriais/lab2.html)
 
 ## Segundo dia:
 
 - **Aula 3**: Introdução à inferência causal ([slides](slides/slides/CausalPensamento.pdf))
 
-- Tutorial 3: Introdução à inferência causal
+- Tutorial 3: [Introdução à inferência causal](tutoriais/PensamentoCausal.html)
