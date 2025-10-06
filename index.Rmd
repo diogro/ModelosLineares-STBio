@@ -34,6 +34,24 @@ Durante o curso, nós vamos introduzir alguns conceitos que são cruciais para o
 Se você quiser começar a entender a linguagem antes do curso iniciar, recomendamos o sítio <http://ecor.ib.usp.br/doku.php>, da disciplina básica de R oferecida pelo Departamento de Ecologia do IB-USP. 
 O link "Atividades Preparatórias" oferece um introdução da linguagem.
 
+# Aulas Teóricas
+
+## Primeiro dia
+
+- **Aula 1**: Introdução e Modelos lineares simples ([slides](slides/ModelosLineares.pdf))
+- **Aula 2**: Modelos lineares múltiplos, transformação e interações ([slides](slides/ModelosLinearesMultiplos.pdf))
+
+
+## Segundo dia
+
+- **Aula 3**: Introdução à inferência causal ([slides](slides/slides/CausalPensamento.pdf))
+
+# Tutoriais
+
+- Tutorial 1: [Modelos lineares simples](tutoriais/lab1.html)
+- Tutorial 2: [Modelos lineares múltiplos](tutoriais/lab2.html)
+- Tutorial 3: [Introdução à inferência causal](tutoriais/PensamentoCausal.html)
+
 # Material de apoio
 
 Esse curso é baseado no curso de modelagem estatística oferecido na formação em ecologia teórica de Serrapilheira. O site do curso de anos passados está abaixo e tem muitas referências, outras aulas, e tutoriais. 
@@ -41,20 +59,3 @@ Esse curso é baseado no curso de modelagem estatística oferecido na formação
 - [2023 course website](https://statistical-inference.netlify.app/)
   - [Video lectures](https://www.youtube.com/results?search_query=QEco+Program%3A+Statistical+models)
 - [2024 course website](https://statistical-modeling.github.io/2024/) 
-
-# Aulas Teóricas
-
-
-## Primeiro dia:
-
-- **Aula 1**: Introdução e Modelos lineares simples ([slides](slides/ModelosLineares.pdf))
-- **Aula 2**: Modelos lineares múltiplos, transformação e interações ([slides](slides/ModelosLinearesMultiplos.pdf))
-
-- Tutorial 1: [Modelos lineares simples](tutoriais/lab1.html)
-- Tutorial 2: [Modelos lineares múltiplos](tutoriais/lab2.html)
-
-## Segundo dia:
-
-- **Aula 3**: Introdução à inferência causal ([slides](slides/slides/CausalPensamento.pdf))
-
-- Tutorial 3: [Introdução à inferência causal](tutoriais/PensamentoCausal.html)
