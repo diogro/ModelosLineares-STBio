@@ -31,7 +31,7 @@ Os tutoriais propostos se baseiam em rotinas prontas, uma para cada aula, de mod
 Assim, estes exercícios servem como ponto de partida para você começar a entender a linguagem. 
 Durante o curso, nós vamos introduzir alguns conceitos que são cruciais para o entendimento das rotinas que estamos disponibilizando aqui.
 
-Se você quiser começar a entender a linguagem antes do curso iniciar, recomendamos o sítio <http://ecologia.ib.usp.br/bie5782/>, da disciplina básica de R oferecida pelo Departamento de Ecologia do IB-USP. 
+Se você quiser começar a entender a linguagem antes do curso iniciar, recomendamos o sítio <http://ecor.ib.usp.br/doku.php>, da disciplina básica de R oferecida pelo Departamento de Ecologia do IB-USP. 
 O link "Atividades Preparatórias" oferece um introdução da linguagem.
 
 # Material de apoio
@@ -41,35 +41,6 @@ Esse curso é baseado no curso de modelagem estatística oferecido na formação
 - [2023 course website](https://statistical-inference.netlify.app/)
   - [Video lectures](https://www.youtube.com/results?search_query=QEco+Program%3A+Statistical+models)
 - [2024 course website](https://statistical-modeling.github.io/2024/) 
-
-
-# Cronograma
-
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
-if(!require(knitr)){install.packages("knitr"); library(knitr)}
-if(!require(kableExtra)){install.packages("kableExtra"); library(kableExtra)}
-dt = data.frame(Dias = paste(rep(c("Segunda", 
-                                   "Terça", 
-                                   "Quarta", 
-                                   "Quinta"), each = 2), c("Manhã", "Tarde")),
-                Aula =c("Introdução e Histórico", "Introdução à Genética Quantitativa",
-                        "Homologia e Mensuração", "Caracterização de variação multidimensional",
-                        "Niveis de Modularidade", "Detecção de Modularidade",
-                        "Seleção e a Paisagem Adaptativa", "Consequencias Evolutivas da Modularidade"),
-                Tutorial = c("Introdução ao R", "Sem tutorial",
-                             "Introdução à Algebra Linear", "Estimando matrizes e componentes principais",
-                             "Sem tutorial", "Detectando Modularidade",
-                             "Estimando Seleção e a Matriz G",
-                             "Consequências Evolutivas"),
-                Ministrante = c("Monique", "Diogo",
-                                "Diogo", "Diogo",
-                                "Monique", "Monique",
-                                "Diogo", "Monique"))
-                
-dt %>%
-  kable() %>%
-  kable_styling(bootstrap_options = "striped", full_width = F)
-```
 
 # Aulas Teóricas
 

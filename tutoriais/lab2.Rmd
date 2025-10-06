@@ -1,0 +1,165 @@
+---
+title: "Multiple linear regression Lab using rethinking"
+author:
+ - "Andrea Sánchez-Tapia"
+ - "Paulo Inácio Prado"
+ - "Sara Mortara"
+ - "Diogo Melo" 
+date: "2025-01-28"
+output:
+    distill::distill_article:
+      toc: true
+      toc_depth: 3
+---
+
+```{r setup, echo=FALSE}
+library(rmarkdown)
+knitr::opts_chunk$set(eval = FALSE, fig.asp = 1)
+## We'll use base R `lm()` for the examples in this file.
+
+# keep rmarkdown and knitr settings; users can load other packages if needed in specific chunks
+```
+
+# Introduction
+
+We can extend the simple linear regression model to accommodate multiple predictors. These are the **multiple linear regression** models, of which the simple linear regression is just a particular case with a single predictor variable.
+
+In the next sections, we will show how to fit multiple regression models using the `rethinking` package, interpret the model coefficients, and visualize the results.
+
+# Additive multiple linear model
+
+In an additive multiple linear regression, the expected value of the response $μ$ is the sum of multiple predictor variables $X_i$, each one weighted by its own coefficient $β_i$ :
+
+$$
+\begin{align}
+y_i &\sim Normal(\mu_i, \sigma) \\
+\mu_i & = \alpha + \beta_1 x_{i1} + \beta_2 x_{i2} + \dots + \beta_j x_{ij} \\
+\end{align}
+$$
+
+
+## Fitting
+
+We will use the same dataset of the biennial plant *Ipomopsis aggregata*. Forty plants were assigned to two treatments: unprotected from grazing and protected from grazing. The fruit yield of each plant was measured along with the diameter of the rootstock.
+
+Prepare the data:
+
+```{r data, eval=TRUE}
+df <- read.csv("https://raw.githubusercontent.com/lmmx/crawley-r-statistics-book-notes/master/code/ipomopsis.csv")
+names(df) <- c("Root", "Fruit", "Grazing")
+df$Root <- scale(df$Root, center = TRUE, scale = TRUE)
+df$Fruit <- scale(df$Fruit, center = TRUE, scale = TRUE)
+
+# Ungrazed is the control, and fenced grazed is the fenced treatment:
+df$Grazing0 <- ifelse(df$Grazing == "Ungrazed", 1, 0)
+```
+
+Fit the additive model using `rethinking`:
+
+```{r fit_model}
+## Fit the additive multiple linear regression using base R's lm()
+
+# Model contract:
+# - inputs: df with columns `Fruit` (response), `Grazing0` and `Root` (predictors)
+# - output: an object of class 'lm' with coefficients for intercept, Grazing0 and Root
+
+m1 <- lm(Fruit ~ Grazing0 + Root, data = df)
+```
+
+Extract and summarize the coefficients:
+
+```{r summarize_model}
+## Summarize the fitted lm model
+
+summary(m1)
+
+# extract coefficients as a named vector for downstream plotting
+m1_coef <- coef(m1)
+
+## 95% CI for the coefficients
+confint(m1)
+```
+
+## Visualizing Predictions
+
+Create a plot to show the observed data and predicted values:
+
+```{r plot_predictions}
+# Plot the observed data
+plot(df$Fruit ~ df$Root, 
+     col = ifelse(df$Grazing0 == 1, "red", "black"), 
+     pch = ifelse(df$Grazing0 == 1, 17, 16),
+     xlab = "Basal diameter (z-scores)", 
+     ylab = "Fruit dry weight (z-scores)")
+
+## Add predicted regression lines for each grazing group using the lm coefficients
+# Intercept for Grazing0 == 0 (baseline)
+intercept0 <- m1_coef["(Intercept)"]
+# Difference in intercept for Grazing0 == 1
+intercept_diff <- ifelse("Grazing0" %in% names(m1_coef), m1_coef["Grazing0"], 0)
+# Slope for Root (same for both groups in this additive model)
+slope_root <- m1_coef["Root"]
+
+abline(a = intercept0, b = slope_root, col = "black", lwd = 2)
+abline(a = intercept0 + intercept_diff, b = slope_root, col = "red", lwd = 2)
+
+# Add legend
+legend("topleft", legend = c("Fenced", "Control"), col = c("red", "black"), 
+       pch = c(17, 16), lty = 1, bty = "n")
+
+```
+
+# Adding Interactions to the Model
+
+Interactions can model how the relationship between predictors and the response variable changes depending on the levels of other predictors. For example, we can model an interaction between soil moisture (`water`) and shade (`shade`) in the `tulips` dataset.
+
+Prepare the data:
+
+```{r tulips_data}
+tulips <- read.csv2("https://raw.githubusercontent.com/rmcelreath/rethinking/master/data/tulips.csv") 
+tulips$blooms <- tulips$blooms / max(tulips$blooms)
+tulips$water <- scale(tulips$water, scale = FALSE)
+tulips$shade <- scale(tulips$shade, scale = FALSE)
+```
+
+Fit the interaction model:
+
+```{r fit_interaction}
+## Fit an interaction model with lm()
+
+# Model contract:
+# - inputs: `tulips` with numeric `blooms`, `water`, `shade`
+# - output: an 'lm' object capturing main effects and the water:shade interaction
+
+m2 <- lm(blooms ~ water * shade, data = tulips)
+```
+
+Summarize the interaction model:
+
+```{r summarize_interaction}
+## Summarize the interaction model (lm)
+summary(m2)
+confint(m2)
+```
+
+Visualize the interaction:
+
+```{r visualize_interaction}
+## Visualize the interaction using predicted lines for low/median/high shade
+library(ggplot2)
+cf = coef(m2)
+a = cf["(Intercept)"]; b = cf["water"]; c = cf["shade"]; d = cf["water:shade"]
+col = scales::hue_pal()(3)
+
+# Model: a + b*w + c*s + d*w*s
+
+ggplot(tulips, aes(x = water, y = blooms, color = factor(shade))) +
+    geom_point(size = 2) +
+    geom_abline(intercept = a - c, slope = b - d, col = col[1]) +
+    geom_abline(intercept = a    , slope = b    , col = col[2]) +
+    geom_abline(intercept = a + c, slope = b + d, col = col[3]) + theme_classic()
+```
+
+# References
+
++ McElreath, R., 2018. Statistical Rethinking: A Bayesian Course with Examples in R and Stan, 2nd ed. CRC Press.
