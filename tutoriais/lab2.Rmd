@@ -54,7 +54,7 @@ df$Fruit <- scale(df$Fruit, center = TRUE, scale = TRUE)
 df$Grazing0 <- ifelse(df$Grazing == "Ungrazed", 1, 0)
 ```
 
-Fit the additive model using `rethinking`:
+Fit the additive model using `lm()`:
 
 ```{r fit_model}
 ## Fit the additive multiple linear regression using base R's lm()

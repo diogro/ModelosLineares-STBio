@@ -2439,7 +2439,7 @@ y_i &amp;\sim Normal(\mu_i, \sigma) \\
 <span><span class="va">df</span><span class="op">$</span><span class="va">Grazing0</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">Grazing</span> <span class="op">==</span> <span class="st">&quot;Ungrazed&quot;</span>, <span class="fl">1</span>, <span class="fl">0</span><span class="op">)</span></span></code></pre>
 </div>
 </div>
-<p>Fit the additive model using <code>rethinking</code>:</p>
+<p>Fit the additive model using <code>lm()</code>:</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class="co">## Fit the additive multiple linear regression using base R&#39;s lm()</span></span>
@@ -2480,7 +2480,7 @@ y_i &amp;\sim Normal(\mu_i, \sigma) \\
 <span><span class="co"># Intercept for Grazing0 == 0 (baseline)</span></span>
 <span><span class="va">intercept0</span> <span class="op">&lt;-</span> <span class="va">m1_coef</span><span class="op">[</span><span class="st">&quot;(Intercept)&quot;</span><span class="op">]</span></span>
 <span><span class="co"># Difference in intercept for Grazing0 == 1</span></span>
-<span><span class="va">intercept_diff</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="st">&quot;Grazing0&quot;</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">m1_coef</span><span class="op">)</span>, <span class="va">m1_coef</span><span class="op">[</span><span class="st">&quot;Grazing0&quot;</span><span class="op">]</span>, <span class="fl">0</span><span class="op">)</span></span>
+<span><span class="va">intercept_diff</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="st">&quot;Grazing0&quot;</span> <span class="op"><a href="https://mc-stan.org/posterior/reference/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">m1_coef</span><span class="op">)</span>, <span class="va">m1_coef</span><span class="op">[</span><span class="st">&quot;Grazing0&quot;</span><span class="op">]</span>, <span class="fl">0</span><span class="op">)</span></span>
 <span><span class="co"># Slope for Root (same for both groups in this additive model)</span></span>
 <span><span class="va">slope_root</span> <span class="op">&lt;-</span> <span class="va">m1_coef</span><span class="op">[</span><span class="st">&quot;Root&quot;</span><span class="op">]</span></span>
 <span></span>
